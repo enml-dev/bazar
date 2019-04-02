@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">Bazar</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Bazar Cubano</string>
+    <string name="nav_header_subtitle">info@bazarcubano.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Configuracion</string>
+    <string name="insertar_anuncio">Nuevo Anuncio</string>
+    <string name="favoritos">Favoritos</string>
+    <string name="mi_cuenta">Mi Cuenta</string>
+    <string name="ayuda_contacto">Ayuda y Contacto</string>
+    <string name="contactenos">Contactenos</string>
+    <string name="app_info">Informacion de la App</string>
+    <string name="chat">Chat</string>
+    <string name="action_search">Buscar</string>
+    <string name="action_save">Salvar</string>
+</resources>

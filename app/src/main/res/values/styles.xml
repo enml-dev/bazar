@@ -1,0 +1,43 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="AppTheme.Light" parent="@style/Theme.AppCompat.Light.NoActionBar">
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:colorAccent" tools:ignore="NewApi">@color/colorAccent</item>
+        <item name="android:listSeparatorTextViewStyle">@style/MPL_PreferenceListHeader</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+    </style>
+
+    <style name="MPL_PreferenceListHeader">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_marginBottom">16dp</item>
+        <item name="android:textAppearance">@style/TextAppearance.AppCompat.Body2</item>
+        <item name="android:textColor">?attr/colorAccent</item>
+        <item name="android:paddingStart" tools:targetApi="17">?attr/listPreferredItemPaddingLeft
+        </item>
+        <item name="android:paddingLeft">?attr/listPreferredItemPaddingLeft</item>
+        <item name="android:paddingEnd" tools:targetApi="17">?attr/listPreferredItemPaddingRight
+        </item>
+        <item name="android:paddingRight">?attr/listPreferredItemPaddingRight</item>
+        <item name="android:paddingTop">16dp</item>
+    </style>
+
+</resources>

@@ -1,0 +1,320 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/coordinator"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/appbar_header_height"
+        android:fitsSystemWindows="true"
+        android:stateListAnimator="@null"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:id="@+id/collapsing_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fitsSystemWindows="true"
+            app:contentScrim="?attr/colorPrimary"
+            app:expandedTitleMarginStart="@dimen/activity_margin_content"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed|snap">
+
+            <android.support.v4.view.ViewPager
+                android:id="@+id/slide_image_view_page"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_collapseMode="parallax" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="160dp"
+                android:layout_gravity="bottom"
+                android:background="@drawable/scrim" />
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/anim_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:layout_collapseMode="pin"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+
+        </android.support.design.widget.CollapsingToolbarLayout>
+
+    </android.support.design.widget.AppBarLayout>
+
+    <android.support.v4.widget.NestedScrollView
+        android:id="@+id/scroll_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:isScrollContainer="true"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+            <com.yarolegovich.mp.MaterialPreferenceCategory
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:mpc_title="General Info"
+                app:mpc_title_color="@color/colorAccent">
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:id="@+id/lblRateMe"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="14dp"
+                        android:textSize="16dp"
+                        android:textColor="@color/black"
+                        android:text="Rating: " />
+
+                    <RatingBar
+                        android:id="@+id/ratingBar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:numStars="5"
+                        android:rating="3.0"
+                        style="?android:attr/ratingBarStyleSmall"/>
+
+                </LinearLayout>
+
+                <com.yarolegovich.mp.MaterialStandardPreference
+                    android:id="@+id/rating"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:mp_title="Rating: 4.3" />
+
+                <com.yarolegovich.mp.MaterialStandardPreference
+                    android:id="@+id/price_level"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:mp_title="Price-level: $$$$" />
+
+            </com.yarolegovich.mp.MaterialPreferenceCategory>
+
+
+            <com.yarolegovich.mp.MaterialPreferenceCategory
+                android:id="@+id/address_card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:mpc_title="Address"
+                app:mpc_title_color="@color/colorAccent">
+
+                <TextView
+                    android:id="@+id/address"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="14dp"
+                    android:textSize="16dp"
+                    android:textColor="@color/black"
+                    android:text="La Habana, Cuba" />
+
+
+            </com.yarolegovich.mp.MaterialPreferenceCategory>
+
+
+            <com.yarolegovich.mp.MaterialPreferenceCategory
+                android:id="@+id/contactInfoCard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/contactInfoCard"
+                app:mpc_title="Contact Details"
+                app:mpc_title_color="@color/colorAccent">
+
+
+                <com.yarolegovich.mp.MaterialStandardPreference
+                    android:id="@+id/phone_number"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:autoLink="phone"
+                    app:mp_icon="@drawable/ic_local_phone_black_24dp"
+                    app:mp_key="phone_number"
+                    app:mp_title=" "
+                    app:mp_show_value="onRight">
+
+                    <TextView
+                        android:id="@+id/phone_number1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:autoLink="phone"
+                        android:layout_gravity="left"
+                        android:text="+5353170678"
+                        android:textColor="@color/black"
+                        android:textSize="16dp" />
+
+                </com.yarolegovich.mp.MaterialStandardPreference>
+
+                <com.yarolegovich.mp.MaterialStandardPreference
+                    android:id="@+id/web_site"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:mp_icon="@drawable/ic_language_green_24dp"
+                    app:mp_key="web_site"
+                    app:mp_show_value="onBottom"
+                    app:mp_title=" ">
+
+                    <TextView
+                        android:id="@+id/web_site1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:autoLink="web"
+                        android:layout_gravity="left"
+                        android:text="+5353170678"
+                        android:textColor="@color/black"
+                        android:textSize="16dp" />
+                </com.yarolegovich.mp.MaterialStandardPreference>
+
+            </com.yarolegovich.mp.MaterialPreferenceCategory>
+
+
+            <com.yarolegovich.mp.MaterialPreferenceCategory
+                android:id="@+id/openHoursCard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:mpc_title="Open Hours"
+                app:mpc_title_color="@color/colorAccent">
+
+                <com.yarolegovich.mp.MaterialStandardPreference
+                    android:id="@+id/open"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:autoLink="phone"
+                    app:mp_icon="@drawable/ic_event_available_green_24dp"
+                    app:mp_key="phone_number"
+                    app:mp_show_value="onBottom"
+                    app:mp_title="Open Now">
+                </com.yarolegovich.mp.MaterialStandardPreference>
+
+                <TextView
+                    android:id="@+id/weekday_text1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:autoLink="web"
+                    android:layout_gravity="left"
+                    android:layout_marginLeft="14dp"
+                    android:layout_marginTop="2dp"
+                    android:text="Monday"
+                    android:textColor="@color/black"
+                    android:textSize="16dp"
+                    android:visibility="gone"/>
+
+                <TextView
+                    android:id="@+id/weekday_text2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:autoLink="web"
+                    android:layout_gravity="left"
+                    android:layout_marginLeft="14dp"
+                    android:layout_marginTop="2dp"
+                    android:text="Monday"
+                    android:textColor="@color/black"
+                    android:textSize="16dp"
+                    android:visibility="gone"/>
+
+                <TextView
+                    android:id="@+id/weekday_text3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:autoLink="web"
+                    android:layout_gravity="left"
+                    android:layout_marginLeft="14dp"
+                    android:layout_marginTop="2dp"
+                    android:text="Monday"
+                    android:textColor="@color/black"
+                    android:textSize="16dp"
+                    android:visibility="gone"/>
+
+                <TextView
+                    android:id="@+id/weekday_text4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:autoLink="web"
+                    android:layout_gravity="left"
+                    android:layout_marginLeft="14dp"
+                    android:layout_marginTop="2dp"
+                    android:text="Monday"
+                    android:textColor="@color/black"
+                    android:textSize="16dp"
+                    android:visibility="gone"/>
+
+                <TextView
+                    android:id="@+id/weekday_text5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:autoLink="web"
+                    android:layout_gravity="left"
+                    android:layout_marginLeft="14dp"
+                    android:layout_marginTop="2dp"
+                    android:text="Monday"
+                    android:textColor="@color/black"
+                    android:textSize="16dp"
+                    android:visibility="gone"/>
+
+                <TextView
+                    android:id="@+id/weekday_text6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:autoLink="web"
+                    android:layout_gravity="left"
+                    android:layout_marginLeft="14dp"
+                    android:layout_marginTop="2dp"
+                    android:text="Monday"
+                    android:textColor="@color/black"
+                    android:textSize="16dp"
+                    android:visibility="gone"/>
+
+                <TextView
+                    android:id="@+id/weekday_text7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:autoLink="web"
+                    android:layout_gravity="left"
+                    android:layout_marginLeft="14dp"
+                    android:layout_marginTop="2dp"
+                    android:text="Monday"
+                    android:textColor="@color/black"
+                    android:textSize="16dp"
+                    android:visibility="gone"/>
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/openHoursRecyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:nestedScrollingEnabled="false"
+                    android:paddingBottom="16dp"
+                    android:paddingLeft="16dp"
+                    android:paddingRight="16dp"
+                    android:paddingTop="16dp" />
+            </com.yarolegovich.mp.MaterialPreferenceCategory>
+
+        </LinearLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab_route"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/fab_margin"
+        android:clickable="true"
+        android:focusable="true"
+        app:fabSize="normal"
+        app:layout_anchor="@+id/appbar"
+        app:layout_anchorGravity="bottom|right|end"
+        app:srcCompat="@drawable/ic_directions_white_24dp" />
+
+</android.support.design.widget.CoordinatorLayout>

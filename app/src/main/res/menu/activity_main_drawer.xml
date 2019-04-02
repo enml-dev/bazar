@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_new_anuncio"
+            android:icon="@drawable/ic_edit_green_24dp"
+            android:title="@string/insertar_anuncio" />
+        <item
+            android:id="@+id/nav_favoritos"
+            android:icon="@drawable/ic_favorite_green_24dp"
+            android:title="@string/favoritos" />
+        <item
+            android:id="@+id/nav_chat"
+            android:icon="@drawable/ic_chat_green_24dp"
+            android:title="@string/chat" />
+        <item
+            android:id="@+id/nav_manage"
+            android:icon="@drawable/ic_person_green_24dp"
+            android:title="@string/mi_cuenta" />
+    </group>
+
+    <item android:title="@string/ayuda_contacto">
+        <menu>
+            <item
+                android:id="@+id/nav_contact_us"
+                android:icon="@drawable/ic_email_green_24dp"
+                android:title="@string/contactenos" />
+            <item
+                android:id="@+id/nav_info"
+                android:icon="@drawable/ic_info_green_24dp"
+                android:title="@string/app_info" />
+        </menu>
+    </item>
+
+</menu>
