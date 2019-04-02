@@ -1,7 +1,7 @@
 package com.enml.bazar.ui;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.enml.bazar.R;
 
