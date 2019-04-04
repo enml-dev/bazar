@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Bazar</string>
+    <string name="display_name">Titulo</string>
+    <string name="general_info">Informacion General</string>
+    <string name="upload_photos">Subir Fotos</string>
+    <string name="photos">Fotos</string>
+    <string name="action_save">Salvar</string>
+    <string name="action_search">Buscar</string>
+    <string name="app_info">Informacion de la App</string>
+    <string name="contactenos">Contactenos</string>
+    <string name="ayuda_contacto">Ayuda y Contacto</string>
+    <string name="mi_cuenta">Mi Cuenta</string>
+    <string name="favoritos">Favoritos</string>
+    <string name="insertar_anuncio">Nuevo Anuncio</string>
+    <string name="action_settings">Configuracion</string>
+    <string name="navigation_drawer_open">"Abrir "</string>
+    <string name="navigation_drawer_close">Cerrar</string>
+    <string name="nav_header_title">Bazar Cubano</string>
+    <string name="nav_header_subtitle">info@bazarcubano.com</string>
+    <string name="description">Descripcion</string>
+    <string name="status">Estado</string>
+    <string name="price">Precio</string>
+    <string name="chat">Chat</string>
+    <string name="title">Titulo (100 caracteres max)</string>
+    <string name="select_category">Seleccione una Categoria</string>
+    <string name="name">Nombre</string>
+    <string name="phone_number">Numero de Telefono</string>
+    <string name="email">e-mail</string>
+    <string name="category" >Categoria</string>
+    <string name="contact_info">Informacion de Contacto</string>
+    <string name="location_info">Location</string>
+</resources>
