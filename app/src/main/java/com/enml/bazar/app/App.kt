@@ -5,8 +5,13 @@ import android.content.Context
 import com.enml.bazar.data.model.*
 import com.enml.bazar.utils.Constants.PARSE_APP_ID
 import com.enml.bazar.utils.Constants.PARSE_SERVER_URL
+import com.enml.bazar.utils.MediaLoader
 import com.parse.Parse
 import com.parse.ParseObject
+import com.yanzhenjie.album.AlbumConfig
+import com.yanzhenjie.album.Album
+
+
 
 class App : Application() {
 
@@ -32,6 +37,10 @@ class App : Application() {
                         .server(PARSE_SERVER_URL)
                         .enableLocalDataStore()// The trailing slash is important.
                         .build())
+
+        Album.initialize(AlbumConfig.newBuilder(this)
+                .setAlbumLoader(MediaLoader())
+                .build())
 
     }
 

@@ -1,16 +1,25 @@
 package com.enml.bazar.ui;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
 
 import com.enml.bazar.R;
 import com.enml.bazar.utils.MultipleMunicipalitySelectionSpinner;
 import com.enml.bazar.utils.MultipleSelectionSpinner;
 import com.google.android.material.snackbar.Snackbar;
 import com.jaredrummler.materialspinner.MaterialSpinner;
+import com.yanzhenjie.album.Action;
+import com.yanzhenjie.album.Album;
+import com.yanzhenjie.album.AlbumFile;
+import com.yanzhenjie.permission.AndPermission;
+import com.yanzhenjie.permission.Permission;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class NewItemActivity extends AppCompatActivity {
@@ -22,12 +31,23 @@ public class NewItemActivity extends AppCompatActivity {
     //List which hold multiple selection spinner values
     List<String> list = new ArrayList<String>();
 
+    ImageView image1, image2, image3;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setTheme(R.style.AppTheme);
         setContentView(R.layout.activity_new_item);
+
+
+        image1 = findViewById(R.id.image1);
+        image1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                photoFromGallery();
+            }
+        });
 
         MaterialSpinner spinner = findViewById(R.id.spinnerStatus);
         spinner.setItems("Estado del Producto", "Nuevo", "Usado");
@@ -84,5 +104,45 @@ public class NewItemActivity extends AppCompatActivity {
                 Toast.makeText(NewItemActivity.this, "Selected : " + provinceSpinner.getSelectedItemsAsString() , Toast.LENGTH_SHORT).show();
             }
         });*/
+    }
+
+    private void photoFromGallery() {
+        AndPermission.with(this)
+                .runtime()
+                .permission(Permission.Group.STORAGE)
+                .onGranted(new com.yanzhenjie.permission.Action<List<String>>() {
+                    @Override
+                    public void onAction(List<String> data) {
+                        Album.image(NewItemActivity.this) // Image selection.
+                                .multipleChoice()
+                                .camera(true)
+                                .columnCount(3)
+                                .selectCount(3)
+                                .onResult(new Action<ArrayList<AlbumFile>>() {
+                                    @Override
+                                    public void onAction(@NonNull ArrayList<AlbumFile> result) {
+                                        ArrayList<File> files = new ArrayList<>();
+                                        for (AlbumFile albumFile : result) {
+                                            files.add(new File(albumFile.getPath()));
+                                        }
+                                        //callback.onAction(files);
+                                    }
+                                })
+                                .onCancel(new Action<String>() {
+                                    @Override
+                                    public void onAction(@NonNull String result) {
+                                    }
+                                })
+                                .start();
+
+                    }
+                })
+                .onDenied(new com.yanzhenjie.permission.Action<List<String>>() {
+                    @Override
+                    public void onAction(List<String> data) {
+
+                    }
+                })
+                .start();
     }
 }
