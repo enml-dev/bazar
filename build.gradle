@@ -3,6 +3,8 @@
 buildscript {
     ext.kotlin_version = '1.3.10'
     ext.parse = '1.19.0'
+    ext.liveDataViewModel = '1.1.1'
+
     repositories {
         google()
         jcenter()

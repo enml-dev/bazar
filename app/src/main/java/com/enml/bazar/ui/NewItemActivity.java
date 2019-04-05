@@ -5,6 +5,10 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.enml.bazar.R;
+import com.enml.bazar.data.ViewModelProviders;
+import com.enml.bazar.data.model.interfaces.ICategory;
+import com.enml.bazar.data.repositories.Resource;
+import com.enml.bazar.data.viewmodel.CategoryViewModel;
 import com.enml.bazar.utils.MultipleMunicipalitySelectionSpinner;
 import com.enml.bazar.utils.MultipleSelectionSpinner;
 import com.google.android.material.snackbar.Snackbar;
@@ -21,6 +25,7 @@ import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
 
 public class NewItemActivity extends AppCompatActivity {
 
@@ -40,6 +45,14 @@ public class NewItemActivity extends AppCompatActivity {
         setTheme(R.style.AppTheme);
         setContentView(R.layout.activity_new_item);
 
+        CategoryViewModel categoryViewModel = (CategoryViewModel) ViewModelProviders.get(this, CategoryViewModel.class);
+
+        categoryViewModel.getCategories().observe(this, new Observer<Resource<List<ICategory>>>() {
+            @Override
+            public void onChanged(Resource<List<ICategory>> listResource) {
+
+            }
+        });
 
         image1 = findViewById(R.id.image1);
         image1.setOnClickListener(new View.OnClickListener() {
