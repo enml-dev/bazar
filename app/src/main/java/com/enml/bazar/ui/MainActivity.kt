@@ -20,7 +20,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         setSupportActionBar(toolbar)
 
         fab.setOnClickListener { view ->
-            val intent = Intent(this, NewItemActivity::class.java)
+            val intent = Intent(this, ItemWizardActivity::class.java)
             startActivity(intent)
         }
 

@@ -13,4 +13,6 @@
     <string name="category" >Category</string>
     <string name="contact_info">Contact Info</string>
     <string name="location_info">Location</string>
+    <string name="infantiles">Articulos Infantiles</string>
+    <string name="new_item_wizard">New Item Wizard</string>
 </resources>

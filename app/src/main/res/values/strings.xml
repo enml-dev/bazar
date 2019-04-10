@@ -30,4 +30,30 @@
     <string name="category">Category</string>
     <string name="contact_info">Contact Info</string>
     <string name="location_info">Location</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="abc_an_amazing_alphabet_book">Celulares y Accesorios</string>
+
+    <string name="are_you_my_mother">Autos y Piezas</string>
+    <string name="where_is_babys_belly_button">Deportes, Musica y Hobbies</string>
+    <string name="on_the_night_you_were_born">Computadores y Accesorios</string>
+    <string name="hand_hand_fingers_thumb">Servicios</string>
+    <string name="the_very_hungry_caterpillar">Empleos</string>
+    <string name="the_going_to_bed_book">Vivienda</string>
+    <string name="oh_baby_go_baby">Mascotas</string>
+    <string name="the_tooth_book">Moda y Belleza</string>
+    <string name="one_fish_two_fish_red_fish_blue_fish">Divisa</string>
+
+    <string name="dr_seuss">Dr. Seuss</string>
+    <string name="karen_katz">Karen Katz</string>
+    <string name="nancy_tillman">Nancy Tillman</string>
+    <string name="eric_carle">Eric Carle</string>
+    <string name="sandra_boynton">Sandra Boynton</string>
+    <string name="infantiles">Articulos Infantiles</string>
+    <string name="electrodomesticos">Para su Casa</string>
+    <string name="new_item_wizard">New Item Wizard</string>
+
 </resources>

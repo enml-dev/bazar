@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/selectCategoryFragment">
+
+    <fragment
+        android:id="@+id/selectCategoryFragment"
+        android:name="com.enml.bazar.ui.fragments.SelectCategoryFragment"
+        android:label="fragment_select_category"
+        tools:layout="@layout/fragment_select_category">
+        <action
+            android:id="@+id/action_selectCategoryFragment_to_casaFragment"
+            app:destination="@id/casaFragment" />
+        <action
+            android:id="@+id/action_selectCategoryFragment_to_celularesFragment"
+            app:destination="@+id/celularesFragment"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/celularesFragment"
+        android:name="com.enml.bazar.ui.fragments.CelularesFragment"
+        android:label="fragment_celulares"
+        tools:layout="@layout/fragment_celulares" >
+        <action
+            android:id="@+id/action_celularesFragment_to_selectCategoryFragment"
+            app:destination="@id/selectCategoryFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/casaFragment"
+        android:name="com.enml.bazar.ui.fragments.CasaFragment"
+        android:label="fragment_casa"
+        tools:layout="@layout/fragment_casa" />
+
+</navigation>
