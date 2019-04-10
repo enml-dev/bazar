@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface ICategoryDAO {
     void getCategories(GetCallback<List<ICategory>> callback);
+
+    void loadCategories();
 }

@@ -8,4 +8,6 @@ import java.util.List;
 
 public interface ISubCategoryDAO {
     void getSubCategories(ICategory category, GetCallback<List<ISubCategory>> callback);
+
+    void loadSubCategories();
 }

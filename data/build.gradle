@@ -44,4 +44,6 @@ dependencies {
     // ViewModel and LiveData
     implementation "android.arch.lifecycle:extensions:$liveDataViewModel"
     annotationProcessor "android.arch.lifecycle:compiler:$liveDataViewModel"
+
+    implementation 'com.koushikdutta.ion:ion:2.1.8'
 }

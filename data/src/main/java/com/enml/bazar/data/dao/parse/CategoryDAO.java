@@ -7,6 +7,7 @@ import com.enml.bazar.data.dao.interfaces.ICategoryDAO;
 import com.enml.bazar.data.model.interfaces.ICategory;
 import com.enml.bazar.data.model.parse.Category;
 import com.parse.ParseException;
+import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
@@ -16,8 +17,7 @@ public class CategoryDAO implements ICategoryDAO {
 
     @Override
     public void getCategories(final GetCallback<List<ICategory>> callback) {
-        Log.e("+++++++", String.valueOf(ParseUser.getCurrentUser()));
-        ParseQuery<Category> query = ParseQuery.getQuery(Category.class);
+        ParseQuery<Category> query = ParseQuery.getQuery(Category.class).fromLocalDatastore();
 
         query.findInBackground(new com.parse.FindCallback<Category>() {
             @Override
@@ -30,8 +30,23 @@ public class CategoryDAO implements ICategoryDAO {
                     }
                     e.printStackTrace();
                 } else {
-                    Log.e("********", categoryList.toString());
                     callback.done(categoryList, e);
+                }
+            }
+        });
+    }
+
+    @Override
+    public void loadCategories() {
+        ParseQuery<Category> query = ParseQuery.getQuery(Category.class);
+
+        query.findInBackground(new com.parse.FindCallback<Category>() {
+            @Override
+            public void done(List categoryList, ParseException e) {
+                try {
+                    ParseObject.pinAll(categoryList);
+                } catch (ParseException e1) {
+                    e1.printStackTrace();
                 }
             }
         });
