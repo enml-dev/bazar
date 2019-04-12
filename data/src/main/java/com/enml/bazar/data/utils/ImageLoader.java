@@ -6,9 +6,6 @@ import android.graphics.BitmapFactory;
 import android.os.Environment;
 import android.widget.ImageView;
 
-import com.enml.bazar.data.R;
-import com.enml.bazar.data.model.interfaces.ICategory;
-import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Ion;
 import com.koushikdutta.ion.builder.AnimateGifMode;
 import com.squareup.pollexor.Thumbor;
@@ -24,7 +21,7 @@ public class ImageLoader {
 
     private static Thumbor thumbor = Thumbor.create("http://69.89.12.148:8888/");
 
-    public static File getLocalImage(final String id, final String size, final int roundCorner) {
+    private static File getLocalImage(final String id, final String size, final int roundCorner) {
         final File direct = new File(
                 Environment.getExternalStorageDirectory() + "/bazar/Images/");
 
@@ -92,6 +89,26 @@ public class ImageLoader {
     }
 
     public static void loadImage(final Context context, final String imageId, String imageURL, final String size, final int roundCorner, final ImageBitmapResult imageBitmapResult) {
+        loadImage(context, imageId, imageURL, size, roundCorner, imageBitmapResult, null);
+    }
+
+    public static void loadImage(final Context context, final String imageId, String imageURL, final String size, final int roundCorner, final ImageView contactImg) {
+        loadImage(context, imageId, imageURL, size, roundCorner, null, contactImg);
+    }
+
+    public static void loadImage(final Context context, final String imageId, String imageURL, final ImageBitmapResult imageBitmapResult) {
+        loadImage(context, imageId, imageURL, "0x0", 0, imageBitmapResult, null);
+    }
+
+    public static void loadImage(final Context context, final String imageId, String imageURL, final ImageView contactImg) {
+        loadImage(context, imageId, imageURL, "0x0", 0, null, contactImg);
+    }
+
+    public static void loadImage(final Context context, final String imageId, String imageURL) {
+        loadImage(context, imageId, imageURL, "0x0", 0, null, null);
+    }
+
+    private static void loadImage(final Context context, final String imageId, String imageURL, final String size, final int roundCorner, final ImageBitmapResult imageBitmapResult, final ImageView contactImg) {
         try {
 
             final int defaultImage = android.R.drawable.btn_default;
@@ -101,12 +118,17 @@ public class ImageLoader {
 
                 if (file == null || !file.exists()) {
                     if (imageURL != null && imageURL.startsWith("http")) {
+                        String image = imageURL;
+                        if (Integer.parseInt(size.split("x")[0]) != 0) {
+                            image = thumbor.buildImage(imageURL)
+                                    .resize(Integer.parseInt(size.split("x")[0]), Integer.parseInt(size.split("x")[1]))
+                                    .filter(thumbor.buildImage(imageURL).roundCorner(roundCorner),
+                                            thumbor.buildImage(imageURL).format(ThumborUrlBuilder.ImageFormat.JPEG))
+                                    .toUrl();
+                        }
+
                         Ion.with(context)
-                                .load(thumbor.buildImage(imageURL)
-                                        .resize(Integer.parseInt(size.split("x")[0]), Integer.parseInt(size.split("x")[1]))
-                                        .filter(thumbor.buildImage(imageURL).roundCorner(roundCorner),
-                                                thumbor.buildImage(imageURL).format(ThumborUrlBuilder.ImageFormat.JPEG))
-                                        .toUrl())
+                                .load(image)
                                 .withBitmap()
                                 .animateGif(AnimateGifMode.ANIMATE)
                                 .placeholder(defaultImage)
@@ -121,6 +143,10 @@ public class ImageLoader {
                                                 imageBitmapResult.bitmapResult(result);
                                             }
 
+                                            if (contactImg != null) {
+                                                contactImg.setImageBitmap(result);
+                                            }
+
                                             try {
                                                 saveImage(result, imageId, size, roundCorner);
                                             } catch (Exception e1) {
@@ -128,6 +154,10 @@ public class ImageLoader {
                                             }
                                         } else {
                                             // Error
+                                            if (contactImg != null) {
+                                                contactImg.setImageResource(defaultImage);
+                                            }
+
                                             if (imageBitmapResult != null) {
                                                 imageBitmapResult.bitmapResult(BitmapFactory.decodeResource(context.getResources(), defaultImage));
                                             }
@@ -147,11 +177,19 @@ public class ImageLoader {
                                     public void onCompleted(Exception e, Bitmap result) {
                                         if (e == null) {
                                             // Success
+                                            if (contactImg != null) {
+                                                contactImg.setImageBitmap(result);
+                                            }
+
                                             if (imageBitmapResult != null) {
                                                 imageBitmapResult.bitmapResult(result);
                                             }
                                         } else {
                                             // Error
+                                            if (contactImg != null) {
+                                                contactImg.setImageResource(defaultImage);
+                                            }
+
                                             if (imageBitmapResult != null) {
                                                 imageBitmapResult.bitmapResult(BitmapFactory.decodeResource(context.getResources(), defaultImage));
                                             }
@@ -172,11 +210,19 @@ public class ImageLoader {
                                 public void onCompleted(Exception e, Bitmap result) {
                                     if (e == null) {
                                         // Success
+                                        if (contactImg != null) {
+                                            contactImg.setImageBitmap(result);
+                                        }
+
                                         if (imageBitmapResult != null) {
                                             imageBitmapResult.bitmapResult(result);
                                         }
                                     } else {
                                         // Error
+                                        if (contactImg != null) {
+                                            contactImg.setImageResource(defaultImage);
+                                        }
+
                                         if (imageBitmapResult != null) {
                                             imageBitmapResult.bitmapResult(BitmapFactory.decodeResource(context.getResources(), defaultImage));
                                         }
@@ -185,118 +231,12 @@ public class ImageLoader {
                             });
                 }
             } else {
+                if (contactImg != null) {
+                    contactImg.setImageResource(defaultImage);
+                }
+
                 if (imageBitmapResult != null) {
                     imageBitmapResult.bitmapResult(BitmapFactory.decodeResource(context.getResources(), defaultImage));
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    public static void loadContactImage(Context context, final String imageId, String imageURL, final String size, final int roundCorner, final ImageView contactImg) {
-        try {
-            if (contactImg != null) {
-                contactImg.setImageDrawable(null);
-
-                final int defaultImage = android.R.drawable.btn_default;
-
-                if (imageURL != null) {
-                    File file = getLocalImage(imageId, size, roundCorner);
-
-                    if (file == null || !file.exists()) {
-                        if (imageURL != null && imageURL.startsWith("http")) {
-                            Ion.with(context)
-                                    // TODO: 8/29/2018 revisar esto para obtener imagenes del profile usando servidor en internet
-                                    .load(thumbor.buildImage(imageURL)
-                                            .resize(Integer.parseInt(size.split("x")[0]), Integer.parseInt(size.split("x")[1]))
-                                            .filter(thumbor.buildImage(imageURL).roundCorner(roundCorner),
-                                                    thumbor.buildImage(imageURL).format(ThumborUrlBuilder.ImageFormat.JPEG))
-                                            .toUrl())
-                                    .withBitmap()
-                                    .animateGif(AnimateGifMode.ANIMATE)
-                                    .placeholder(defaultImage)
-                                    .error(defaultImage)
-                                    .asBitmap()
-                                    .setCallback(new com.koushikdutta.async.future.FutureCallback<Bitmap>() {
-                                        @Override
-                                        public void onCompleted(Exception e, Bitmap result) {
-                                            if (e == null) {
-                                                // Success
-                                                contactImg.setImageBitmap(result);
-                                                try {
-                                                    saveImage(result, imageId, size, roundCorner);
-                                                } catch (Exception e1) {
-                                                    e1.printStackTrace();
-                                                }
-                                            } else {
-                                                // Error
-                                                contactImg.setImageResource(defaultImage);
-                                            }
-                                        }
-                                    });
-                        } else {
-                            //Glide.with(context).load(image).into(contactImg);
-
-            /*Picasso.with(context).cancelRequest(contactImg);
-            Picasso.with(context)
-                .load(image)
-                .into(contactImg);*/
-
-                            Ion.with(context)
-                                    .load(imageURL)
-                                    .withBitmap()
-                                    .animateGif(AnimateGifMode.ANIMATE)
-                                    .placeholder(defaultImage)
-                                    .error(defaultImage)
-                                    .asBitmap()
-                                    .setCallback(new com.koushikdutta.async.future.FutureCallback<Bitmap>() {
-                                        @Override
-                                        public void onCompleted(Exception e, Bitmap result) {
-                                            if (e == null) {
-                                                // Success
-                                                contactImg.setImageBitmap(result);
-                                            } else {
-                                                // Error
-                                                contactImg.setImageResource(defaultImage);
-                                            }
-                                        }
-                                    });
-
-                            //Ion.with(context).load(image).intoImageView(contactImg);
-                        }
-                    } else {
-                        //Glide.with(context).load(file).into(contactImg);
-                        //Ion.with(context).load(file).intoImageView(contactImg);
-
-                        Ion.with(context)
-                                .load(file)
-                                .withBitmap()
-                                .animateGif(AnimateGifMode.ANIMATE)
-                                .placeholder(defaultImage)
-                                .error(defaultImage)
-                                .asBitmap()
-                                .setCallback(new com.koushikdutta.async.future.FutureCallback<Bitmap>() {
-                                    @Override
-                                    public void onCompleted(Exception e, Bitmap result) {
-                                        if (e == null) {
-                                            // Success
-                                            contactImg.setImageBitmap(result);
-                                        } else {
-                                            // Error
-                                            contactImg.setImageResource(defaultImage);
-                                        }
-                                    }
-                                });
-
-
-          /*Picasso.with(context).cancelRequest(contactImg);
-          Picasso.with(context)
-              .load(image)
-              .into(contactImg);*/
-                    }
-                } else {
-                    contactImg.setImageResource(defaultImage);
                 }
             }
         } catch (Exception e) {
